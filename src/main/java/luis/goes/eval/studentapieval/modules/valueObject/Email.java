@@ -28,7 +28,7 @@ public final class Email {
     private String validate(String email) {
         if (email == null) throw HttpException.badRequest("Email must not be null.");
 
-        if (StringUtils.isBlank(email)) throw HttpException.badRequest("Email must no be blank");
+        if (StringUtils.isBlank(email)) throw HttpException.badRequest("Email must no be blank.");
 
         if (!REGEX.matcher(email).matches()) throw HttpException.badRequest("Invalid email address format.");
 
