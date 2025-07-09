@@ -26,7 +26,7 @@ public class StudentEntity {
     @Embedded
     private StudentInfo studentInfo;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private GradeEntity grade;
 
     public StudentEntity(UUID id, StudentInfo studentInfo, GradeEntity grade) {
