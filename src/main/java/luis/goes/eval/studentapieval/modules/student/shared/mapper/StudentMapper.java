@@ -33,21 +33,26 @@ public class StudentMapper implements Mapper<StudentResponseDto, StudentEntity> 
     }
 
     private Character getFirstLetterThatDoesNotRepeat(String name) {
-        if (name == null || name.isBlank()) throw HttpException.badRequest("Name must not be null or blank. ");
+        if (name == null || name.isBlank()) {
+            throw HttpException.badRequest("Name must not be null or blank.");
+        }
 
         final Map<Character, Integer> frequency = new LinkedHashMap<>();
 
         for (char character : name.toLowerCase().toCharArray()) {
-            frequency.put(character, frequency.getOrDefault(character, 0) + 1);
+            if (character != ' ') {
+                frequency.put(character, frequency.getOrDefault(character, 0) + 1);
+            }
         }
 
         for (char character : name.toLowerCase().toCharArray()) {
-            if (frequency.get(character) == 1) {
+            if (character != ' ' && frequency.get(character) == 1) {
                 return character;
             }
         }
 
         return '_';
     }
+
 
 }
