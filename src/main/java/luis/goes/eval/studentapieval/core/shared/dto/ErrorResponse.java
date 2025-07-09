@@ -11,4 +11,5 @@ public record ErrorResponse(boolean success, String message, int statusCode) {
     public ErrorResponse(String message, int statusCode) {
         this(false, message, statusCode);
     }
+
 }

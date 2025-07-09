@@ -30,4 +30,5 @@ public class HttpException extends RuntimeException {
     public static HttpException forbidden(String message) {
         return new HttpException(message, StatusCode.FORBIDDEN);
     }
+
 }
