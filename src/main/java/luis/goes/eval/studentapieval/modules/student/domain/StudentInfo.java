@@ -24,11 +24,22 @@ public class StudentInfo {
     @Column(name = "email", nullable = false, unique = true)
     private Email email;
 
-    public StudentInfo(Name name, Cpf cpf, Email email) {
-        this.name = name;
-        this.cpf = cpf;
-        this.email = email;
+    public StudentInfo(String name, String cpf, String email) {
+        this.name = new Name(name);
+        this.cpf = new Cpf(cpf);
+        this.email = new Email(email);
     }
 
+    public void changeName(String name) {
+        this.name = new Name(name);
+    }
+
+    public void changeCpf(String cpf) {
+        this.cpf = new Cpf(cpf);
+    }
+
+    public void changeEmail(String email) {
+        this.email = new Email(email);
+    }
 
 }
