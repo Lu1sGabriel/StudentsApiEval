@@ -16,7 +16,8 @@ public class EmailGenerator {
             throw HttpException.badRequest("Name is required to generate email.");
         }
 
-        String[] parts = fullName.trim().toLowerCase().split("\\s+");
+        String nameWithoutAccents = NameFormatter.removeAccents(fullName.strip());
+        String[] parts = nameWithoutAccents.trim().toLowerCase().split("\\s+");
         List<String> filtered = Arrays.stream(parts)
                 .filter(p -> !PREPOSITIONS.contains(p))
                 .toList();
