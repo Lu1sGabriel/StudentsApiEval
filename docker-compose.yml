@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres
+    container_name: postgres-student-eval
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: studentEval_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres1234
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - urlShortener_network
+
+volumes:
+  postgres_data:
+
+networks:
+  urlShortener_network:
+    driver: bridge
