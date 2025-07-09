@@ -32,7 +32,7 @@ public class StudentGet implements IStudentGet {
 
     @Override
     public List<StudentResponseDto> getAll() {
-        List<StudentEntity> studentList = repository.findByStudentDateInfo_DeletedAtIsNull(Sort.by(Sort.Direction.ASC, "name"));
+        List<StudentEntity> studentList = repository.findByStudentDateInfo_DeletedAtIsNull(Sort.by(Sort.Direction.ASC, "studentInfo.name.name"));
         return mapper.toDtoList(studentList);
     }
 

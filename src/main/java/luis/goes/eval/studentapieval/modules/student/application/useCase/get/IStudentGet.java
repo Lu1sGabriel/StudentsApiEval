@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IStudentGet {
+
     StudentResponseDto getById(UUID id);
 
     List<StudentResponseDto> getAll();
@@ -15,4 +16,5 @@ public interface IStudentGet {
     StudentResponseDto getByCpf(String cpf);
 
     StudentResponseDto getByEmail(String email);
+
 }
