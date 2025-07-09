@@ -26,7 +26,7 @@ public class StudentEntity implements Mappable {
     private UUID id;
 
     @Embedded
-    @AttributeOverride(name = "grade", column = @Column(name = "grade", nullable = false, unique = true, precision = 4, scale = 2))
+    @AttributeOverride(name = "grade", column = @Column(name = "grade", nullable = false, precision = 4, scale = 2))
     private Grade grade;
 
     @Embedded
