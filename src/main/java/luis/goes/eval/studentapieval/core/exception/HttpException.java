@@ -31,4 +31,8 @@ public class HttpException extends RuntimeException {
         return new HttpException(message, StatusCode.FORBIDDEN);
     }
 
+    public static HttpException conflict(String message) {
+        return new HttpException(message, StatusCode.CONFLICT);
+    }
+
 }
