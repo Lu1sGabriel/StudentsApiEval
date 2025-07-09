@@ -17,7 +17,7 @@ public class EmailGenerator {
         }
 
         String nameWithoutAccents = NameFormatter.removeAccents(fullName.strip());
-        String[] parts = nameWithoutAccents.trim().toLowerCase().split("\\s+");
+        String[] parts = nameWithoutAccents.strip().toLowerCase().split("\\s+");
         List<String> filtered = Arrays.stream(parts)
                 .filter(p -> !PREPOSITIONS.contains(p))
                 .toList();
@@ -28,7 +28,7 @@ public class EmailGenerator {
 
         String first = filtered.get(0);
         String second = filtered.size() > 2 ? filtered.get(1) : "";
-        String last = filtered.get(filtered.size() - 1);
+        String last = filtered.getLast();
 
         String base = first + second + "." + last;
         String email = base + DOMAIN;

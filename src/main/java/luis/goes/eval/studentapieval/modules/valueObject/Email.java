@@ -32,7 +32,7 @@ public final class Email {
 
         if (!REGEX.matcher(email).matches()) throw HttpException.badRequest("Invalid email address format.");
 
-        return email.trim();
+        return email.strip();
     }
 
     public String getValue() {
