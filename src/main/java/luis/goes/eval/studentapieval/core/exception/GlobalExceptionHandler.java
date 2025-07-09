@@ -9,6 +9,7 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -79,6 +80,20 @@ public class GlobalExceptionHandler {
                 formatedMessage,
                 StatusCode.BAD_REQUEST
         );
+        return ResponseEntity.status(error.statusCode()).body(error);
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ErrorResponse> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex) {
+        String method = ex.getMethod();
+        String[] supportedMethods = ex.getSupportedMethods();
+        String supported = supportedMethods != null ? String.join(", ", supportedMethods) : "none";
+
+        ErrorResponse error = new ErrorResponse(
+                String.format("Method '%s' is not supported for this endpoint. Supported methods: %s.", method, supported),
+                StatusCode.METHOD_NOT_ALLOWED
+        );
+
         return ResponseEntity.status(error.statusCode()).body(error);
     }
 
