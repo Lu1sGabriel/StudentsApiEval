@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/studentEval_db
+    username: postgres
+    password: postgres1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: true
+
+  profiles:
+    active: dev
+
+  jackson:
+    time-zone: America/Sao_Paulo
+
+server:
+  port: 8080
+
+security:
+  argon2:
+    salt-length: 16
+    hash-length: 32
+    parallelism: 1
+    memory: 15360
+    iterations: 2
