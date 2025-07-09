@@ -1,10 +1,8 @@
 package luis.goes.eval.studentapieval.modules.student.presentation.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import luis.goes.eval.studentapieval.modules.student.application.useCase.StudentUseCase;
 import luis.goes.eval.studentapieval.modules.student.presentation.dto.StudentRequestDto;
 import luis.goes.eval.studentapieval.modules.student.presentation.dto.StudentResponseDto;
-import luis.goes.eval.studentapieval.modules.student.presentation.dto.StudentResponseWithRoute;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,45 +19,33 @@ public class StudentController {
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<StudentResponseWithRoute> getById(@PathVariable UUID id, HttpServletRequest request) {
-        StudentResponseDto student = studentUseCase.getGetterMethods().getById(id);
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(student, accessedRoute));
+    public ResponseEntity<StudentResponseDto> getById(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(studentUseCase.getGetterMethods().getById(id));
     }
 
     @GetMapping(value = "/name/{name}")
-    public ResponseEntity<StudentResponseWithRoute> getByName(@PathVariable String name, HttpServletRequest request) {
-        StudentResponseDto student = studentUseCase.getGetterMethods().getByName(name);
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(student, accessedRoute));
+    public ResponseEntity<StudentResponseDto> getByName(@PathVariable String name) {
+        return ResponseEntity.ok().body(studentUseCase.getGetterMethods().getByName(name));
     }
 
     @GetMapping(value = "/cpf/{cpf}")
-    public ResponseEntity<StudentResponseWithRoute> getByCpf(@PathVariable String cpf, HttpServletRequest request) {
-        StudentResponseDto student = studentUseCase.getGetterMethods().getByCpf(cpf);
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(student, accessedRoute));
+    public ResponseEntity<StudentResponseDto> getByCpf(@PathVariable String cpf) {
+        return ResponseEntity.ok().body(studentUseCase.getGetterMethods().getByCpf(cpf));
     }
 
     @GetMapping(value = "/email/{email}")
-    public ResponseEntity<StudentResponseWithRoute> getByEmail(@PathVariable String email, HttpServletRequest request) {
-        StudentResponseDto student = studentUseCase.getGetterMethods().getByEmail(email);
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(student, accessedRoute));
+    public ResponseEntity<StudentResponseDto> getByEmail(@PathVariable String email) {
+        return ResponseEntity.ok().body(studentUseCase.getGetterMethods().getByEmail(email));
     }
 
     @GetMapping
-    public ResponseEntity<StudentResponseWithRoute> getAll(HttpServletRequest request) {
-        List<StudentResponseDto> students = studentUseCase.getGetterMethods().getAll();
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(students, accessedRoute));
+    public ResponseEntity<List<StudentResponseDto>> getAll() {
+        return ResponseEntity.ok().body(studentUseCase.getGetterMethods().getAll());
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponseWithRoute> create(@RequestBody StudentRequestDto dto, HttpServletRequest request) {
-        StudentResponseDto createdStudent = studentUseCase.getCreate().create(dto);
-        String accessedRoute = request.getRequestURI();
-        return ResponseEntity.ok(new StudentResponseWithRoute(createdStudent, accessedRoute));
+    public ResponseEntity<StudentResponseDto> create(@RequestBody StudentRequestDto dto) {
+        return ResponseEntity.ok().body(studentUseCase.getCreate().create(dto));
     }
 
 }
