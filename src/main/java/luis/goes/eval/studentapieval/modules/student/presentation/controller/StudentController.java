@@ -1,8 +1,7 @@
 package luis.goes.eval.studentapieval.modules.student.presentation.controller;
 
 import luis.goes.eval.studentapieval.modules.student.application.useCase.StudentUseCase;
-import luis.goes.eval.studentapieval.modules.student.presentation.dto.StudentRequestDto;
-import luis.goes.eval.studentapieval.modules.student.presentation.dto.StudentResponseDto;
+import luis.goes.eval.studentapieval.modules.student.presentation.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +45,26 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentResponseDto> create(@RequestBody StudentRequestDto dto) {
         return ResponseEntity.ok().body(studentUseCase.getCreate().create(dto));
+    }
+
+    @PatchMapping(value = "/change/name")
+    public ResponseEntity<StudentResponseDto> changeName(@RequestBody StudentChangeNameDto dto) {
+        return ResponseEntity.ok().body(studentUseCase.getChangeName().change(dto));
+    }
+
+    @PatchMapping(value = "/change/cpf")
+    public ResponseEntity<StudentResponseDto> changeCpf(@RequestBody StudentChangeCpfDto dto) {
+        return ResponseEntity.ok().body(studentUseCase.getChangeCpf().change(dto));
+    }
+
+    @PatchMapping(value = "/change/email")
+    public ResponseEntity<StudentResponseDto> changeEmail(@RequestBody StudentChangeEmailDto dto) {
+        return ResponseEntity.ok().body(studentUseCase.getChangeEmail().change(dto));
+    }
+
+    @PatchMapping(value = "/change/grade")
+    public ResponseEntity<StudentResponseDto> changeGrade(@RequestBody StudentChangeGradeDto dto) {
+        return ResponseEntity.ok().body(studentUseCase.getChangeGrade().change(dto));
     }
 
 }
