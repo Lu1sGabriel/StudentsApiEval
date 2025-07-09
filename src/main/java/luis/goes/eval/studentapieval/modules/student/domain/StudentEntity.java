@@ -3,9 +3,11 @@ package luis.goes.eval.studentapieval.modules.student.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import luis.goes.eval.studentapieval.modules.grade.GradeEntity;
+import luis.goes.eval.studentapieval.core.shared.mapper.entityToDto.Mappable;
+import luis.goes.eval.studentapieval.modules.valueObject.Grade;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -18,21 +20,46 @@ import java.util.UUID;
         })
 @NoArgsConstructor
 @Getter
-public class StudentEntity {
+public class StudentEntity implements Mappable {
 
     @Id
     private UUID id;
 
     @Embedded
+    @AttributeOverride(name = "grade", column = @Column(name = "grade", nullable = false, unique = true, precision = 4, scale = 2))
+    private Grade grade;
+
+    @Embedded
     private StudentInfo studentInfo;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private GradeEntity grade;
+    @Embedded
+    private StudentDateInfo studentDateInfo;
 
-    public StudentEntity(UUID id, StudentInfo studentInfo, GradeEntity grade) {
+    public StudentEntity(StudentInfo studentInfo, BigDecimal grade) {
         this.id = UUID.randomUUID();
+        this.grade = new Grade(grade);
         this.studentInfo = studentInfo;
-        this.grade = grade;
+        this.studentDateInfo = new StudentDateInfo();
+    }
+
+    public void changeGrade(BigDecimal grade) {
+        this.grade = new Grade(grade);
+        this.studentDateInfo.update();
+    }
+
+    public void changeName(String name) {
+        this.studentInfo.changeName(name);
+        this.studentDateInfo.update();
+    }
+
+    public void changeCpf(String cpf) {
+        this.studentInfo.changeCpf(cpf);
+        this.studentDateInfo.update();
+    }
+
+    public void changeEmail(String email) {
+        this.studentInfo.changeEmail(email);
+        this.studentDateInfo.update();
     }
 
     @Override
