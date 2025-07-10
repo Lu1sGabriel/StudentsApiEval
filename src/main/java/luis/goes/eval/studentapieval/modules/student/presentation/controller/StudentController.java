@@ -67,4 +67,10 @@ public class StudentController {
         return ResponseEntity.ok().body(studentUseCase.getChangeGrade().change(dto));
     }
 
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<Void> deactivate(@PathVariable UUID id) {
+        studentUseCase.getDeactivate().deactivate(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

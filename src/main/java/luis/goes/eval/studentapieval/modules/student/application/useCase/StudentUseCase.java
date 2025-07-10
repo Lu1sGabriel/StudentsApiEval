@@ -6,6 +6,7 @@ import luis.goes.eval.studentapieval.modules.student.application.useCase.changeE
 import luis.goes.eval.studentapieval.modules.student.application.useCase.changeGrade.IStudentChangeGrade;
 import luis.goes.eval.studentapieval.modules.student.application.useCase.changeName.IStudentChangeName;
 import luis.goes.eval.studentapieval.modules.student.application.useCase.create.IStudentCreate;
+import luis.goes.eval.studentapieval.modules.student.application.useCase.deactivate.IStudentDeactivate;
 import luis.goes.eval.studentapieval.modules.student.application.useCase.get.IStudentGet;
 import org.springframework.stereotype.Component;
 
@@ -18,15 +19,17 @@ public class StudentUseCase {
     private final IStudentChangeCpf changeCpf;
     private final IStudentChangeEmail changeEmail;
     private final IStudentChangeGrade changeGrade;
+    private final IStudentDeactivate deactivate;
 
     public StudentUseCase(IStudentGet getterMethods, IStudentCreate create, IStudentChangeName changeName, IStudentChangeCpf changeCpf,
-                          IStudentChangeEmail changeEmail, IStudentChangeGrade changeGrade) {
+                          IStudentChangeEmail changeEmail, IStudentChangeGrade changeGrade, IStudentDeactivate deactivate) {
         this.getterMethods = getterMethods;
         this.create = create;
         this.changeName = changeName;
         this.changeCpf = changeCpf;
         this.changeEmail = changeEmail;
         this.changeGrade = changeGrade;
+        this.deactivate = deactivate;
     }
 
 }
