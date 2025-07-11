@@ -3,7 +3,6 @@ package luis.goes.eval.studentapieval.modules.student.application.useCase.deacti
 import luis.goes.eval.studentapieval.core.exception.HttpException;
 import luis.goes.eval.studentapieval.modules.student.domain.StudentEntity;
 import luis.goes.eval.studentapieval.modules.student.infrastructure.StudentRepository;
-import luis.goes.eval.studentapieval.modules.student.shared.mapper.StudentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -11,11 +10,9 @@ import java.util.UUID;
 @Service
 public class StudentDeactivate implements IStudentDeactivate {
     private final StudentRepository repository;
-    private final StudentMapper mapper;
 
-    public StudentDeactivate(StudentRepository repository, StudentMapper mapper) {
+    public StudentDeactivate(StudentRepository repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
     @Override
