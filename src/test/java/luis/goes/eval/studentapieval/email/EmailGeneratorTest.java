@@ -48,9 +48,7 @@ public class EmailGeneratorTest {
     void shouldThrowExceptionWhenNameIsNull() {
         Set<String> existing = new HashSet<>();
 
-        Exception exception = assertThrows(HttpException.class, () -> {
-            EmailGenerator.generateFromName(null, existing);
-        });
+        Exception exception = assertThrows(HttpException.class, () -> EmailGenerator.generateFromName(null, existing));
 
         assertTrue(exception.getMessage().contains("Name is required to generate email."));
     }
@@ -59,9 +57,7 @@ public class EmailGeneratorTest {
     void shouldThrowExceptionWhenNameIsBlank() {
         Set<String> existing = new HashSet<>();
 
-        Exception exception = assertThrows(HttpException.class, () -> {
-            EmailGenerator.generateFromName("   ", existing);
-        });
+        Exception exception = assertThrows(HttpException.class, () -> EmailGenerator.generateFromName("   ", existing));
 
         assertTrue(exception.getMessage().contains("Name is required to generate email."));
     }
@@ -70,9 +66,7 @@ public class EmailGeneratorTest {
     void shouldThrowExceptionWhenNameHasOnlyOneValidWord() {
         Set<String> existing = new HashSet<>();
 
-        Exception exception = assertThrows(HttpException.class, () -> {
-            EmailGenerator.generateFromName("de Santana", existing);
-        });
+        Exception exception = assertThrows(HttpException.class, () -> EmailGenerator.generateFromName("de Santana", existing));
 
         assertTrue(exception.getMessage().contains("Name must contain at least two valid parts."));
     }
