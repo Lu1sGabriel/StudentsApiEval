@@ -1,38 +1,38 @@
 package luis.goes.eval.studentapieval.core.exception;
 
 
-import luis.goes.eval.studentapieval.core.shared.utils.StatusCode;
+import org.springframework.http.HttpStatus;
 
 public class HttpException extends RuntimeException {
-    private final int statusCode;
+    private final HttpStatus status;
 
-    public HttpException(String message, StatusCode statusCode) {
+    public HttpException(String message, HttpStatus status) {
         super(message);
-        this.statusCode = statusCode.getCode();
+        this.status = status;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public HttpStatus getStatus() {
+        return status;
     }
 
     public static HttpException notFound(String message) {
-        return new HttpException(message, StatusCode.NOT_FOUND);
+        return new HttpException(message, HttpStatus.NOT_FOUND);
     }
 
     public static HttpException badRequest(String message) {
-        return new HttpException(message, StatusCode.BAD_REQUEST);
+        return new HttpException(message, HttpStatus.BAD_REQUEST);
     }
 
     public static HttpException unauthorized(String message) {
-        return new HttpException(message, StatusCode.UNAUTHORIZED);
+        return new HttpException(message, HttpStatus.UNAUTHORIZED);
     }
 
     public static HttpException forbidden(String message) {
-        return new HttpException(message, StatusCode.FORBIDDEN);
+        return new HttpException(message, HttpStatus.FORBIDDEN);
     }
 
     public static HttpException conflict(String message) {
-        return new HttpException(message, StatusCode.CONFLICT);
+        return new HttpException(message, HttpStatus.CONFLICT);
     }
 
 }
