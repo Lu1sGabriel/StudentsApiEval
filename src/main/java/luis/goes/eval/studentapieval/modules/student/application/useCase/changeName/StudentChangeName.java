@@ -24,6 +24,8 @@ public class StudentChangeName implements IStudentChangeName {
 
     @Override
     public StudentResponseDto change(StudentChangeNameDto dto) {
+        if (dto.id() == null) throw HttpException.badRequest("The ID must not be null.");
+
         checkIfNameAlreadyExists(dto.name());
 
         StudentEntity student = repository.findById(dto.id())

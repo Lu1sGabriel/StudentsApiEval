@@ -20,6 +20,8 @@ public class StudentChangeCpf implements IStudentChangeCpf {
 
     @Override
     public StudentResponseDto change(StudentChangeCpfDto dto) {
+        if (dto.id() == null) throw HttpException.badRequest("The ID must not be null.");
+
         checkIfCpfAlreadyExists(dto.cpf());
 
         StudentEntity student = repository.findById(dto.id())

@@ -20,6 +20,8 @@ public class StudentChangeEmail implements IStudentChangeEmail {
 
     @Override
     public StudentResponseDto change(StudentChangeEmailDto dto) {
+        if (dto.id() == null) throw HttpException.badRequest("The ID must not be null.");
+
         checkIfEmailAlreadyExists(dto.email());
 
         StudentEntity student = repository.findById(dto.id())

@@ -20,6 +20,8 @@ public class StudentChangeGrade implements IStudentChangeGrade {
 
     @Override
     public StudentResponseDto change(StudentChangeGradeDto dto) {
+        if (dto.id() == null) throw HttpException.badRequest("The ID must not be null.");
+
         StudentEntity student = repository.findById(dto.id())
                 .orElseThrow(() -> HttpException.notFound("Student not found with the given ID."));
 
